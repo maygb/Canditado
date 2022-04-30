@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,47 +15,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fiap.cadastro.model.Candidato;
 import br.com.fiap.cadastro.repository.CandidatoRepository;
 import br.com.fiap.cadastro.repository.LinguagemProgramacaoRepository;
 
-@RestController
+@Controller
 @RequestMapping("candidato")
-public class CandidatoController {
-
+public class CadastroController {
+	
 	@Autowired
 	public CandidatoRepository candidatoRepository;
 
 	@Autowired
 	public LinguagemProgramacaoRepository linguagem;
+
 	
-
 	@GetMapping("cadastrar")
-	public String abrirFormulario(Candidato canditado, Model model) {
+	public String abrirFormulario(Candidato candidato, Model model) {
 		model.addAttribute("linguagem", linguagem.findAll());
-		return "produto/form";
+		return "candidato/form";
 	}
-
+	
 	@PostMapping("cadastrar")
-	public String processarForm(@Valid Candidato canditado, BindingResult result, RedirectAttributes redirect) {
-		if (result.hasErrors()) {
-			return "produto/form";
+	public String processarForm(@Valid Candidato candidato, BindingResult result, RedirectAttributes redirect) {
+		if(result.hasErrors()) {
+			return "candidato/form";
 		}
-
-		redirect.addFlashAttribute("msg", "Cadastrado!");
-		candidatoRepository.save(canditado);
-		return "redirect:listar";
+		
+		redirect.addFlashAttribute("msg","Cadastrado!");
+		candidatoRepository.save(candidato);
+		return "redirect:cadastrar";
 	}
 	
 	@GetMapping("listar")
 	public String listaCanditados(Model model) {
 		List<Candidato> list = candidatoRepository.findAll();
 		Collections.sort(list);
-		model.addAttribute("canditatos", list);
-		return "produto/lista";
+		model.addAttribute("candidatos", list);
+		return "candidato/lista";
 	}
 	
 	@ResponseStatus(code=HttpStatus.CREATED)
@@ -70,5 +70,5 @@ public class CandidatoController {
 		Collections.sort(lista);
 		return lista;
 	}
-
+	
 }

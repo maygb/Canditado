@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{base}">
+	<head>
+		<meta charset="UTF-8">
+		<title>Cadastro de Candidatos</title>
+	</head>
+	<body>
+		<div layout:fragment="conteudo" id="formulario">
+		
+			<form th:action="@{/candidato/cadastrar}" th:object="${candidato}" method="POST">
+				<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+					<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+				</div>
+				<div class="alert alert-success" th:if="${msg !=null}" th:text="${msg}"></div>
+				<div id="formulario"> 
+	        		<h1>Candidatos</h1>
+	        		<br>
+	      		</div>
+	      		
+	      		<input th:field="*{id}" type="hidden">
+	      		
+	      		<div class="form-group">
+					<label for="social">Nome Social</label>
+					<input placeholder="Insira como prefere ser chamado(a)" th:field="*{nomeSocial}" id="social" class="form-control">
+					<br>
+				</div>
+	      		
+	      		<div class="form-group">
+					<label for="nome">Nome Completo (*)</label>
+					<input placeholder="Insira seu nome..." th:field="*{nome}" id="nome" class="form-control">
+					<br>
+				</div>
+				
+				<div class="form-group">
+					<label for="data">Data de Nascimento (*)</label>			
+					<input placeholder="DD/MM/AAAA" th:field="*{dataNascimento}" id="data" class="form-control">
+					<br>
+				</div>
+				
+				<div class="form-group">
+				 	<label for="cpf">CPF (*) </label>
+					<input placeholder="Insira seu cpf..." th:field="*{cpf}" id="cpf" class="form-control">
+					<br>
+				</div>
+				
+				<div class="form-group">
+					<label for="email">E-mail (*)</label>
+					<input placeholder="Insira seu email..." th:field="*{email}" id="email" class="form-control">
+					<br>
+				</div>
+				
+				<div class="form-group">
+					<label for="telefone">Telefone (*)</label>
+					<input placeholder="Insira seu telefone..." th:field="*{telefone}" id="telefone" class="form-control">
+					<br>
+				</div>
+				
+				<label for="genero">Gênero</label>
+				<select th:field="*{genero}" id="genero" class="form-select form-select-sm" aria-label=".form-select-sm example">
+	  				<option value="">Selecione</option>
+	  				<option value="feminino">Feminino</option>
+					<option value="masculino">Masculino</option>
+					<option value="N/I">Prefiro não dizer</option>
+				</select>
+				<br>
+				
+				<label for="linguagem">Linguagem de Programação (*)</label>
+				<select th:field="*{linguagem}" id="linguagem" class="form-control">
+					<option value="">Selecione</option>
+					<option th:each="c:${linguagem}"
+						th:value="${c.id}" th:text="${c.linguagem}"></option>
+				</select>
+				<br>
+				
+				<label for="experiencia">Tempo de Experiência (*)</label>
+				<select th:field="*{experiencia}" id="experiencia" class="form-select form-select-sm" aria-label=".form-select-sm example">
+	  				<option value="null">Não Possui</option>
+					<option value="menos 1 ano">Menos de 1 ano</option>
+					<option value="até 2 anos">Entre 1 ano e 2 anos</option>
+					<option value="até 5 anos">Entre 3 anos e 5 anos</option>
+					<option value="até 8 anos">Entre 6 anos e 8 anos</option>
+					<option value="mais 10 anos">Mais de 8 anos</option>
+				</select>
+				<br>
+				
+				<div class="form-group">
+					<input th:field="*{certificacao}" id="certificado" type="checkbox">
+					<label for="certificado">Possui certificado?(*)</label>
+					<br>
+				</div>
+				
+				<br>
+				<button type="submit" class="btn btn-success">Registre-se</button>
+			</form>
+		</div>
+	</body>
+</html>
