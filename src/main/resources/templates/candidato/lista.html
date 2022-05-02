@@ -1,50 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{base}">
 <head>
-	<meta charset="UTF-8">
-	<title>Lista de Produtos</title>
+<meta charset="UTF-8">
+<title>Lista de Produtos</title>
 </head>
 <body>
-
-<div layout:fragment="conteudo">
-	<div class="alert alert-sucess" th:if="${msg !=null}" th:text="${msg}"></div>
+	<div layout:fragment="conteudo">
+		<div class="alert alert-danger" th:if="${msg !=null}" th:text="${msg}" id="alert"></div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<form action="listar" method="POST" class="container-fluid">
+				<div class="input-group">
+					<label for="search"></label> 
+					<input name="search" class="form-control" type="search" placeholder="Localizar">
+					<button type="submit" class="btn" id="lista-botao">Buscar</button>
+				</div>
+			</form>
+		</nav>
 		<table class="table table-responsive">
-
-		 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Localizar" aria-label="Search">
-				<button type="button" class="btn btn-outline-primary">Search</button>
-			  </form>
-		 </nav>
 			<thead>
-			  <tr>
-			   <th>Nome Social</th>
-			   <th>Nome</th>
-			   <th>Data Nascimento</th>
-			   <th>Genêro</th>
-				<th>CPF</th>
-				<th>Telefone</th>
-				<th>E-mail</th>
-				<th>Linguagem</th> 
-				<th>Certificação</th> 
-				<th>Nota Experiência</th>   
-			  </tr>
-			  
-			  <tr th:each="cand:${candidatos}">
-				<td th:text="${cand.nomeSocial}"></td>
-				<td th:text="${cand.nome}"></td>
-				<td th:text="${#temporals.format(cand.dataNascimento, 'dd/MM/yyyy')}"></td>
-				<td th:text="${cand.genero}"></td>
-				<td th:text="${cand.cpf}"></td>
-				<td th:text="${cand.telefone}"></td>
-				<td th:text="${cand.email}"></td>
-				<td th:text="${cand.linguagem?.linguagem}"></td>				
-				<td th:text="${cand.certificacao?'Sim':'Não'}"></td>
-				<td th:text="${cand.experiencia}"></td>
-			  </tr>
-			</thead> 
-		</table>		
+				<tr id="tabela">
+					<th>Nome Social</th>
+					<th>Nome</th>
+					<th>Data Nascimento</th>
+					<th>Genêro</th>
+					<th>CPF</th>
+					<th>Telefone</th>
+					<th>E-mail</th>
+					<th>Linguagem</th>
+					<th>Certificação</th>
+					<th>Score Experiência</th>
+				</tr>
+
+				<tr th:each="cand:${candidatos}">
+					<td th:text="${cand.nomeSocial}"></td>
+					<td th:text="${cand.nome}"></td>
+					<td th:text="${#temporals.format(cand.dataNascimento, 'dd/MM/yyyy')}"></td>
+					<td th:text="${cand.genero}"></td>
+					<td th:text="${cand.cpf}"></td>
+					<td th:text="${cand.telefone}"></td>
+					<td th:text="${cand.email}"></td>
+					<td th:text="${cand.linguagem?.linguagem}"></td>
+					<td th:text="${cand.certificacao?'Sim':'Não'}"></td>
+					<td th:text="${cand.experiencia}"></td>
+				</tr>
+			</thead>
+		</table>
 	</div>
 </body>
 </html>

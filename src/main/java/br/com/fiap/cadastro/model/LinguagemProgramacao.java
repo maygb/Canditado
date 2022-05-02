@@ -33,6 +33,17 @@ public class LinguagemProgramacao {
 	public void setLinguagem(String linguagem) {
 		this.linguagem = linguagem;
 	}
+
+	public LinguagemProgramacao(int id, String linguagem) {
+		super();
+		this.id = id;
+		this.linguagem = linguagem;
+	}
+
+	public LinguagemProgramacao() {
+		super();
+	}
+	
 	
 	
 }

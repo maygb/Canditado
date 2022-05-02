@@ -1,0 +1,45 @@
+
+#formulario{
+    background: #ED8B00;
+    color: white;
+    margin-top:10px;
+    padding: 5px;
+    text-align: center;
+    border-top-left-radius: 19px;
+    border-top-right-radius: 19px;
+  }
+  
+#form{
+	background: #f8f9fa;
+	border: solid 1px #ED8B00;
+	border-bottom-right-radius: 19px;
+	border-bottom-left-radius: 19px;
+	padding: 10px;
+}
+ 
+#botao{
+	background: #ED8B00;
+	color: white;
+}
+
+#lista-botao{
+	background: #ED8B00;
+	color: white;
+}
+
+#tabela{
+	color: #ED8B00;
+}
+
+#alert{
+	margin-top: 10px;
+}
+
+
+     
+ body{
+    background-color: #f8f9fa !important;
+    color: white
+ }
+ 
+  

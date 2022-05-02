@@ -6,5 +6,7 @@ import br.com.fiap.cadastro.model.LinguagemProgramacao;
 
 
 public interface LinguagemProgramacaoRepository extends JpaRepository<LinguagemProgramacao, Integer>{
+
+	LinguagemProgramacao findByLinguagem(String linguagem);
 	
 }

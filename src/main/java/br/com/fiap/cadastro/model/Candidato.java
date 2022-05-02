@@ -29,7 +29,6 @@ public class Candidato implements Comparable<Candidato> {
 	@Size(max = 70)
 	private String nome;
 	
-	@NotBlank(message = "Data de Nascimento obrigatório!")
 	@Past
 	private LocalDate dataNascimento;
 
@@ -45,7 +44,7 @@ public class Candidato implements Comparable<Candidato> {
 	@Size(max = 60)
 	private String email;
 
-	private String experiencia;
+	private int experiencia;
 	
 	private String genero;
 
@@ -57,7 +56,11 @@ public class Candidato implements Comparable<Candidato> {
 	
 	@Override
 	public int compareTo(Candidato outro) {
+		if(this.certificacao == outro.isCertificacao()) {
+			return Integer.compare(this.experiencia, outro.getExperiencia());
+		}
 		return Boolean.compare(outro.isCertificacao(), this.certificacao);
+		
 	}
 
 	public int getId() {
@@ -92,11 +95,11 @@ public class Candidato implements Comparable<Candidato> {
 		this.telefone = telefone;
 	}
 
-	public String getExperiencia() {
+	public int getExperiencia() {
 		return experiencia;
 	}
 
-	public void setExperiencia(String experiencia) {
+	public void setExperiencia(int experiencia) {
 		this.experiencia = experiencia;
 	}
 
